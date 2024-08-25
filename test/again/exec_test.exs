@@ -26,7 +26,6 @@ defmodule Again.ExecTest do
       exec = Exec.init(policy)
 
       advanced = Exec.advance(exec)
-
       assert exec.attempts + 1 == advanced.attempts
       assert backoff == advanced.last_backoff
       assert {:continue, backoff} == advanced.next
