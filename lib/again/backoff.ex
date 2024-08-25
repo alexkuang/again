@@ -22,4 +22,18 @@ defmodule Again.Backoff do
       if !last_backoff, do: start_with, else: last_backoff <<< 1
     end
   end
+
+  @doc """
+  Given an existing backoff policy, add jitter by introducing a randomness factor of `percentage` to its output.
+
+  For example, if the original policy produces 100 and we have `percentage` of 10, then we produce 90 < backoff < 110
+  """
+  @spec jitter(policy :: policy, percentage :: float) :: policy
+  def jitter(policy, percentage) do
+    fn last_backoff ->
+      original = policy.(last_backoff)
+      diff = round(original * percentage)
+      original + :rand.uniform(2 * diff) - diff
+    end
+  end
 end
