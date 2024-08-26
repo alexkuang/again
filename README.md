@@ -1,6 +1,21 @@
 # Again
 
+[![hex package](https://img.shields.io/hexpm/v/again.svg)](https://hex.pm/packages/again)
+[![hex docs](https://img.shields.io/badge/hex-docs-blue.svg)](https://hexdocs.pm/again/readme.html)
+[![ci](https://github.com/alexkuang/again/actions/workflows/ci.yml/badge.svg)](https://github.com/alexkuang/again/actions/)
+
 A library for retrying work again... and again... and again...
+
+## Installation
+
+```elixir
+def deps do
+  [
+    {:again, "~> 0.1.0"}
+  ]
+end
+```
+
 
 ## Usage
 
@@ -25,3 +40,8 @@ end)
 A couple of things before this library is ready for primetime:
 - Better classification for error + success results
 - Observability into execution state / `Logger` integration
+- More docs + ergonomics
+
+## Documentation
+
+[Latest HexDocs](https://hexdocs.pm/again/)
