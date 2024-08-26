@@ -1,21 +1,27 @@
 # Again
 
-**TODO: Add description**
+A library for retrying work again... and again... and again...
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `again` to your list of dependencies in `mix.exs`:
+## Usage
 
 ```elixir
-def deps do
-  [
-    {:again, "~> 0.1.0"}
-  ]
-end
+# Create a retry policy
+alias Again.{Backoff, Clock, SystemClock, Termination}
+
+policy =
+  %Again.Policy{
+    clock: SystemClock,
+    backoff: Backoff.exponential_backoff(100),
+    termination: Termination.limit_attempts(5)
+  }
+
+# Use it
+Again.retry(policy, fn ->
+  do_something_that_might_fail()
+end)
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/again>.
-
+## TODO
+A couple of things before this library is ready for primetime:
+- Better classification for error + success results
+- Observability into execution state / `Logger` integration
