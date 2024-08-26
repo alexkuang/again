@@ -5,8 +5,9 @@ defmodule Again.Termination do
   Time unit is milliseconds unless otherwose noted.
   """
 
-  @type policy :: (attempts :: pos_integer, elapsed_at_next :: pos_integer ->
-                     should_terminate :: boolean)
+  @type policy ::
+          (attempts :: pos_integer, elapsed_at_next :: pos_integer ->
+             should_terminate :: boolean)
 
   @doc "Retry up to `max_attempts` attempts."
   @spec limit_attempts(max_attempts :: pos_integer) :: policy
